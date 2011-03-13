@@ -1,6 +1,10 @@
 --
 --  Project Euler problem #1
 --
+--  If we list all the natural numbers below 10 that are multiples of 3 or 5,
+--  we get 3, 5, 6 and 9. The sum of these multiples is 23.
+--
+--  Find the sum of all the multiples of 3 or 5 below 1000.
 
 with Ada.Containers.Vectors,
         Ada.Command_Line,
@@ -14,11 +18,11 @@ procedure One is
     package Bucket is new Ada.Containers.Vectors (Index_Type => Natural,
                                                 Element_Type => Natural);
     --
-    --  Print out multiples of 3 and 5 from 0 to the `Upper`
+    --  Return a `Vector` with all the multiples of 3 *or* 5 from 1 until
+    --  `Upper` (non-inclusive)
     function Multiples (Upper : in Natural) return Bucket.Vector is
         Numbers : Bucket.Vector;
     begin
-        -- Non-inclusive
         for Index in 1 .. (Upper - 1) loop
             if (Index mod 3) = 0 then
                 Bucket.Append (Numbers, Index);
