@@ -49,24 +49,19 @@ procedure Four is
 
     Highest_Palindrome : Natural := 0;
 begin
-    for Offset in 0 .. Ceiling loop
-        declare
-            N : constant Natural := Ceiling - Offset;
-        begin
-            for Sub_Offset in 0 .. Ceiling loop
-                declare
-                    J : constant Natural := Ceiling - Sub_Offset;
-                    Product : constant Natural := J * N;
-                    Bailout : constant Boolean := Is_Palindrome (Product);
-                begin
-                    if Bailout then
-                        if Product > Highest_Palindrome then
-                            Highest_Palindrome := Product;
-                        end if;
+    for N in reverse 1 .. Ceiling loop
+        for J in reverse 1 .. Ceiling loop
+            declare
+                Product : constant Natural := J * N;
+                Bailout : constant Boolean := Is_Palindrome (Product);
+            begin
+                if Bailout then
+                    if Product > Highest_Palindrome then
+                        Highest_Palindrome := Product;
                     end if;
-                end;
-            end loop;
-        end;
+                end if;
+            end;
+        end loop;
     end loop;
 
     New_Line;
